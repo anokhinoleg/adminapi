@@ -1,0 +1,30 @@
+# Read the documentation: https://symfony.com/doc/master/bundles/FOSRestBundle/index.html
+
+#    param_fetcher_listener:  true
+#    allowed_methods_listener:  true
+#    routing_loader: true
+#    view:
+#        view_response_listener:  true
+#    exception:
+#        codes:
+#            App\Exception\MyException: 403
+#        messages:
+#            App\Exception\MyException: Forbidden area.
+#    format_listener:
+#        rules:
+#            - { path: ^/api, prefer_extension: true, fallback_format: json, priorities: [ json, html ] }
+fos_user:
+    db_driver:      orm # can be orm or odm
+    firewall_name:  main
+    user_class:     App\Application\Sonata\UserBundle\Entity\User
+
+    group:
+        group_class:   App\Application\Sonata\UserBundle\Entity\Group
+        group_manager: sonata.user.orm.group_manager # If you're using doctrine orm (use sonata.user.mongodb.group_manager for mongodb)
+
+    service:
+        user_manager: sonata.user.orm.user_manager
+
+    from_email:
+        address: dchesnokov@frontdeskhelpers.com
+        sender_name: dchesnokov

@@ -1,0 +1,24 @@
+services:
+
+    admin.reseller:
+        class: App\Admin\ResellerAdmin
+        arguments: [~, App\Entity\Reseller, App\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Resellers, group: "Content" }
+        public: true
+
+    admin.customer:
+        class: App\Admin\CustomerAdmin
+        arguments: [~, App\Entity\Customer, App\Controller\CRUDController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Customers, group: "Content" }
+        public: true
+#        calls:
+#            - [setSubClasses, ["@admin.reseller"]]
+
+    admin.service:
+        class: App\Admin\ServiceAdmin
+        arguments: [~, App\Entity\Service, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Services, group: "Content" }
+        public: true

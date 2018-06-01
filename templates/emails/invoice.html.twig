@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block title %}Invoice{% endblock %}
+{% block body %}
+    <p>Hello {{ customer.name }}. Here your invoice</p>
+    <h1>INVOICE</h1>
+    <hr>
+    <table class="" border="2">
+        <thead>
+        <tr>
+            <th>Service</th>
+            <th>Cost</th>
+            <th>Tax</th>
+            <th>Total</th>
+        </tr>
+        <style>
+            tr>th {
+                background-color: #b0c4de;
+                font-size: 1.8em;
+                border: solid black 2px ;
+            }
+            tr>td {
+
+                font-size: 1.2em;
+                border: solid 2px black;
+            }
+        </style>
+        </thead>
+        <tbody>
+        {% for service in services %}
+            <tr>
+                <td class="payment id">{{ service.name }}</td>
+                <td>{{service.cost}}</td>
+                <td>0%</td>
+                <td>{{service.cost + (0*service.cost)}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div>Total sum: {{ totalSum }}</div>
+    <hr>
+    <div style="text-align: right;">{{ "now"|date('d/m/Y') }}</div>
+{% endblock %}
+
+

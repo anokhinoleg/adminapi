@@ -1,0 +1,49 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/global.css') }}">
+{% endblock %}
+{% block field %}
+    {% if admin.paymentHistory is not empty %}
+
+                <table class="payment-box table table-striped table-dark">
+                    <thead>
+                        <tr>
+                            <th>Payment Number</th>
+                            <th>Services</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for key, payment in admin.paymentHistory %}
+                        {% set amount = payment[0].amountPaid %}
+                        {% set date = payment[0].paymentDate|date("m/d/Y") %}
+                        <tr>
+                            <td class="payment id">{{ key }}</td>
+                            <td class="payment service">
+                                {% for paymentHistory in payment %}
+                                    {{ paymentHistory.paidService ~ ' ' }}
+                                {% endfor %}
+                            </td>
+                            <td class="payment amount">{{ amount }}</td>
+                            <td class="payment date">{{ date }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+        <style>
+            .payment-box {
+
+            }
+            .payment {
+                font-size: 2em;
+            }
+        </style>
+    {% endif %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/app.js') }}"></script>
+{% endblock %}
